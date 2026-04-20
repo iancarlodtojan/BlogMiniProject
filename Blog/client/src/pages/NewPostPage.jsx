@@ -7,13 +7,27 @@ function NewPostPage() {
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newPost = {
       title,
       content,
       author,
     };
-    console.log(newPost);
+
+    try {
+      const response = await fetch("http://localhost:5000/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPost),
+      });
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error submitting post:", error);
+    }
   };
 
   return (
@@ -48,10 +62,11 @@ function NewPostPage() {
         />
 
         <div className="flex gap-3">
-          <Button variant="blue" onClick={handleSubmit}>
-            Create Post
-          </Button>
-
+          <Link to="/">
+            <Button variant="blue" onClick={handleSubmit}>
+              Create Post
+            </Button>
+          </Link>
           <Link to="/">
             <Button variant="red">Back</Button>
           </Link>
