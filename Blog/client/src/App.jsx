@@ -1,10 +1,15 @@
+import {Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import NewPostPage from "./pages/NewPostPage";
 
 function App() {
   return (
-    //<HomePage />
-    <NewPostPage />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/new" element={<NewPostPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

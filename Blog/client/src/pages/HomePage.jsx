@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../components/button";
 
 function HomePage() {
@@ -7,7 +8,10 @@ function HomePage() {
         <h1 className="text-[2.5em] mb-6 text-gray-700 font-semibold">
           My Blog
         </h1>
-        <Button>New Post</Button>
+
+        <Link to="/new">
+          <Button>New Post</Button>
+        </Link>
       </div>
     </div>
   );

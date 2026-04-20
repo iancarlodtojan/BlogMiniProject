@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import Button from "../components/Button";
 function NewPostPage() {
   return (
     <div className="min-h-screen bg-blue-100 py-10">
@@ -24,9 +26,12 @@ function NewPostPage() {
           className="mb-6 w-full rounded border border-gray-300 p-3 text-lg outline-none"
         />
 
-        <button className="rounded bg-blue-600 py-3 px-6 text-lg text-white hover:bg-blue-700 cursor-pointer">
-          Create Post
-        </button>
+        <div className="flex gap-3">
+          <Button>Create Post</Button>
+          <Link to="/">
+            <Button variant="red">Back</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
