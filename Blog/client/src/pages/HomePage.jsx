@@ -1,16 +1,21 @@
 import { useState,useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Button from "../components/Button";
 import PostCard from "../components/PostCard";
 
 function HomePage() {
   const [posts, setPosts] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
   fetch("http://localhost:5000/posts")
     .then(res => res.json())
     .then(data => setPosts(data));
-}, []);
+}, [location]);
+
+  const handlePostDeleted = (id) => {
+    setPosts(posts.filter(post => post.id !== id));
+  };
 
   return (
     <div className="min-h-screen bg-blue-100 py-10">
@@ -35,6 +40,7 @@ function HomePage() {
                 createdAt={post.createdAt}
                 content={post.content}
                 author={post.author}
+                onDelete={handlePostDeleted}
               />
             ))
           )}

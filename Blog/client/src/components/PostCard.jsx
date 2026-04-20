@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "./Button";
 
-function PostCard({ id, title, createdAt, content, author }) {
+function PostCard({ id, title, createdAt, content, author, onDelete }) {
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this post?",
@@ -20,6 +20,7 @@ function PostCard({ id, title, createdAt, content, author }) {
 
       const data = await response.json();
       console.log("Deleted post:", data);
+      onDelete(id);
     } catch (error) {
       console.error("Error deleting post:", error);
     }
