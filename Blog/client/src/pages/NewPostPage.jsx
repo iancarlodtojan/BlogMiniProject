@@ -13,7 +13,6 @@ function NewPostPage() {
       content,
       author,
     };
-
     console.log(newPost);
   };
 

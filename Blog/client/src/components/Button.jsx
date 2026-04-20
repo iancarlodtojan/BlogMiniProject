@@ -4,13 +4,15 @@ const variants = {
   red: "bg-red-500 hover:bg-red-600",
 };
 
-function Button({ children, variant = "green" }) {
+function Button({ children, onClick, variant = "green" }) {
   return (
     <button
+      onClick={onClick}
       className={`px-4 py-2 text-white rounded cursor-pointer ${variants[variant]}`}
     >
       {children}
     </button>
   );
 }
+
 export default Button;
