@@ -30,6 +30,7 @@ function HomePage() {
             posts.map((post) => (
               <PostCard
                 key={post.id}
+                id={post.id}
                 title={post.title}
                 createdAt={post.createdAt}
                 content={post.content}

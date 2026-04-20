@@ -8,7 +8,7 @@ function Button({ children, onClick, variant = "green" }) {
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 text-white rounded cursor-pointer ${variants[variant]}`}
+      className={`px-3 py-1 text-white rounded cursor-pointer ${variants[variant]}`}
     >
       {children}
     </button>
