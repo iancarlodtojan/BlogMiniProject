@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 
 function NewPostPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     const newPost = {
       title,
       content,
       author,
+      createdAt: new Date().toISOString()
     };
 
     try {
@@ -25,6 +27,7 @@ function NewPostPage() {
 
       const data = await response.json();
       console.log(data);
+      navigate("/");
     } catch (error) {
       console.error("Error submitting post:", error);
     }
@@ -62,11 +65,9 @@ function NewPostPage() {
         />
 
         <div className="flex gap-3">
-          <Link to="/">
-            <Button variant="blue" onClick={handleSubmit}>
-              Create Post
-            </Button>
-          </Link>
+          <Button variant="blue" onClick={handleSubmit}>
+            Create Post
+          </Button>
           <Link to="/">
             <Button variant="red">Back</Button>
           </Link>
