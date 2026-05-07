@@ -1,1 +1,2 @@
--Implement axios to simplify backend server
+-Implement axios to simplify backend server ( no need only for frontend) axios for backend is only for external api
+- apply api to simplify pages ( I wont need to import axios for every pages)

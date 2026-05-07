@@ -1,5 +1,6 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 import Button from "../components/Button";
 import PostCard from "../components/PostCard";
 
@@ -8,13 +9,21 @@ function HomePage() {
   const location = useLocation();
 
   useEffect(() => {
-  fetch("http://localhost:5000/posts")
-    .then(res => res.json())
-    .then(data => setPosts(data));
-}, [location]);
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/posts");
+
+        setPosts(response.data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
+  }, [location]);
 
   const handlePostDeleted = (id) => {
-    setPosts(posts.filter(post => post.id !== id));
+    setPosts(posts.filter((post) => post.id !== id));
   };
 
   return (

@@ -1,41 +1,50 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Button from "../components/Button";
 
 function NewPostPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("");
+
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
+
     const newPost = {
       title,
       content,
       author,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     };
 
     try {
-      const response = await fetch("http://localhost:5000/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newPost),
-      });
 
-      const data = await response.json();
-      console.log(data);
+      const response = await axios.post(
+        "http://localhost:5000/posts",
+        newPost
+      );
+
+      console.log(response.data);
+
       navigate("/");
+
     } catch (error) {
-      console.error("Error submitting post:", error);
+
+      console.error(
+        "Error submitting post:",
+        error
+      );
+
     }
   };
 
   return (
     <div className="min-h-screen bg-blue-100 py-10">
+
       <div className="container mx-auto max-w-5xl bg-white p-8 rounded-lg shadow">
+
         <h1 className="text-[2.5em] mb-6 text-gray-700 font-semibold">
           My Blog - New Post
         </h1>
@@ -44,7 +53,9 @@ function NewPostPage() {
           type="text"
           placeholder="Title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) =>
+            setTitle(e.target.value)
+          }
           className="mb-4 w-full rounded border border-gray-300 p-3 text-lg outline-none"
         />
 
@@ -52,7 +63,9 @@ function NewPostPage() {
           placeholder="Content"
           rows="8"
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={(e) =>
+            setContent(e.target.value)
+          }
           className="mb-4 w-full rounded border border-gray-300 p-3 text-lg outline-none resize-none"
         ></textarea>
 
@@ -60,19 +73,31 @@ function NewPostPage() {
           type="text"
           placeholder="Author"
           value={author}
-          onChange={(e) => setAuthor(e.target.value)}
+          onChange={(e) =>
+            setAuthor(e.target.value)
+          }
           className="mb-6 w-full rounded border border-gray-300 p-3 text-lg outline-none"
         />
 
         <div className="flex gap-3">
-          <Button variant="blue" onClick={handleSubmit}>
+
+          <Button
+            variant="blue"
+            onClick={handleSubmit}
+          >
             Create Post
           </Button>
+
           <Link to="/">
-            <Button variant="red">Back</Button>
+            <Button variant="red">
+              Back
+            </Button>
           </Link>
+
         </div>
+
       </div>
+
     </div>
   );
 }
